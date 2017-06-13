@@ -217,13 +217,13 @@ default output type for new buffers."
   "Create the flag to pass to PlantUML to produce the selected output format."
   (concat "-t" plantuml-output-type))
 
-(defmacro plantuml-start-process (buf)
+(defun plantuml-start-process (buf)
   "Run PlantUML as an Emacs process and puts the output into the given buffer (as BUF)."
-  `(start-process "PLANTUML" ,buf
-                  plantuml-java-command
-                  ,@plantuml-java-args
-                  (expand-file-name plantuml-jar-path)
-                  (plantuml-output-type-opt) "-charset" "UTF-8" "-p"))
+  (start-process "PLANTUML" buf
+                 plantuml-java-command
+                 plantuml-java-args
+                 (expand-file-name plantuml-jar-path)
+                 (plantuml-output-type-opt) "-charset" "UTF-8" "-p"))
 
 (defun plantuml-preview-string (prefix string)
   "Preview diagram from PlantUML sources (as STRING), using prefix (as PREFIX)
